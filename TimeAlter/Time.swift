@@ -26,6 +26,7 @@ class Time {
     }
     init(hpd: Int) {
         if hpd < 24 || hpd > 48 {
+            // @to-do 入力値エラー
             return
         }
         self.hpd =  hpd
