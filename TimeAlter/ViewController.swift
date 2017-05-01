@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    let time:Time = Time(hpd: 26);
+    let time:Time = Time(hpd: 24);
     var timer: Timer!
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -16,12 +16,12 @@ import Foundation
  *
  */
 class Time {
-    public  static let mph: Int = 60           ///< minute per hour
     private static let spd: Int = 24 * 60 * 60 ///< second per day
+    private(set)   var mph: Int = 60           ///< minute per hour
     private(set)   var spm: Int = 60           ///< second per minute
     public         var hpd: Int = 24 {         ///< hour   per day
         didSet {
-            self.spm = Time.spd / (hpd * Time.mph)
+            self.spm = Time.spd / (hpd * self.mph)
         }
     }
     public func calcNowTime()->(Int, Int, Int) {
@@ -35,10 +35,10 @@ class Time {
             return second
         }
         var second: Int = generateNowTimeBySeconds()
-        var minute: Int = second / spm
-        second         %= spm
-        let   hour: Int = minute / Time.mph
-        minute         %= Time.mph
+        var minute: Int = second / self.spm
+        second         %= self.spm
+        let   hour: Int = minute / self.mph
+        minute         %= self.mph
         return (hour, minute, second)
     }
     init(hpd: Int) {
@@ -47,6 +47,6 @@ class Time {
             return
         }
         self.hpd =  hpd
-        self.spm = Time.spd / (self.hpd * Time.mph)
+        self.spm = Time.spd / (self.hpd * self.mph)
     }
 }
