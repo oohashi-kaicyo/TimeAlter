@@ -12,13 +12,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let time:Time = Time(hpd: 26);
-        NSLog("hpd: \(time.hpd)")
-        NSLog("mph: \(Time.mph)")
-        NSLog("spm: \(time.spm)")
-        time.hpd = 24
-        NSLog("hpd: \(time.hpd)")
-        NSLog("mph: \(Time.mph)")
-        NSLog("spm: \(time.spm)")
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
