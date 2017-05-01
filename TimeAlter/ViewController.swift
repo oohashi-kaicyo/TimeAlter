@@ -33,23 +33,30 @@ class ViewController: UIViewController {
      * @brief 時計描画更新処理
      */
     func updateHand(time: Time) {
+        let en: Int = 360
         func updateHourHand(hour: Int) {
-            // 回転角度を計算
+            let hourHandAngle: Int   = en / time.hpd
+            print("hourHandAngle: \(hourHandAngle)");
             // アニメーション
         }
         func updateMinuteHand(minute: Int) {
-            // 回転角度を計算
+            let minuteHandAngle: Int = en / time.mph
+            print("minuteHandAngle: \(minuteHandAngle)");
             // アニメーション
         }
         func updateSecondHand(second: Int) {
-            // 回転角度を計算
+            let secondHandAngle: Int = en / time.spm
+            print("secondHandAngle: \(secondHandAngle)");
             // アニメーション
         }
-        var hour: Int;
+        var hour:   Int;
         var minute: Int;
         var second: Int;
         (hour, minute,second) = time.calcNowTime()
         print("\(hour):\(minute):\(second)")
+        updateHourHand(hour: hour);
+        updateMinuteHand(minute: minute)
+        updateSecondHand(second: second)
         
     }
 }
