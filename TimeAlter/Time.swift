@@ -24,6 +24,23 @@ class Time {
             self.spm = Time.spd / (hpd * Time.mph)
         }
     }
+    public func calcNowTime()->(Int, Int, Int) {
+        func generateNowTimeBySeconds()->Int {
+            let date = Date()
+            let cal = Calendar.current
+            var dataComps:DateComponents = cal.dateComponents([.hour, .minute, .second], from: date)
+            let second:Int = (dataComps.hour!   * 60 * 60)
+                           + (dataComps.minute! * 60     )
+                           + (dataComps.second!          )
+            return second
+        }
+        var second: Int = generateNowTimeBySeconds()
+        var minute: Int = second / spm
+        second         %= spm
+        let   hour: Int = minute / Time.mph
+        minute         %= Time.mph
+        return (hour, minute, second)
+    }
     init(hpd: Int) {
         if hpd < 24 || hpd > 48 {
             // @to-do 入力値エラー
