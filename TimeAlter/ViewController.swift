@@ -11,17 +11,11 @@ import UIKit
 class ViewController: UIViewController {
     let time:Time = Time(hpd: 24);
     var timer: Timer!
+    // 引数を省略した場合を想定して，端末の縦横比率を獲得して算出
+    let clock: AnalogClock = AnalogClock(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
     override func viewDidLoad() {
         super.viewDidLoad()
-        // ここにラベルを表示
-        // UIView or UIImageView
-        // 下地
-           // 時間
-           // 時間制御
-           // 文字盤
-           // 時針
-           // 分針
-           // 秒針
+        self.view.addSubview(clock)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
