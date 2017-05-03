@@ -13,6 +13,15 @@ class ViewController: UIViewController {
     var timer: Timer!
     override func viewDidLoad() {
         super.viewDidLoad()
+        // ここにラベルを表示
+        // UIView or UIImageView
+        // 下地
+           // 時間
+           // 時間制御
+           // 文字盤
+           // 時針
+           // 分針
+           // 秒針
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -35,17 +44,17 @@ class ViewController: UIViewController {
     func updateHand(time: Time) {
         let en: Int = 360
         func updateHourHand(hour: Int) {
-            let hourHandAngle: Int   = en / time.hpd
+            let hourHandAngle: Int   = en / time.hpd * hour
             print("hourHandAngle: \(hourHandAngle)");
             // アニメーション
         }
         func updateMinuteHand(minute: Int) {
-            let minuteHandAngle: Int = en / time.mph
+            let minuteHandAngle: Int = en / time.mph * minute
             print("minuteHandAngle: \(minuteHandAngle)");
             // アニメーション
         }
         func updateSecondHand(second: Int) {
-            let secondHandAngle: Int = en / time.spm
+            let secondHandAngle: Int = en / time.spm * second
             print("secondHandAngle: \(secondHandAngle)");
             // アニメーション
         }
@@ -57,6 +66,5 @@ class ViewController: UIViewController {
         updateHourHand(hour: hour);
         updateMinuteHand(minute: minute)
         updateSecondHand(second: second)
-        
     }
 }
