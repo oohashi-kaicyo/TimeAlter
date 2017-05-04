@@ -41,16 +41,16 @@ class AnalogClock: UIView {
     func updateHand() {
         let en: Int = 360
         func updateHourHand(hour: Int) {
-            let hourHandAngle: Double = Double(en / self.time.hpd) * Double(hour)
+            let hourHandAngle: Double = Double(en) / Double(self.time.hpd) * Double(hour)
             self.hourHand.routate(angle: CGFloat((hourHandAngle * .pi) / 180.0))
         }
         func updateMinuteHand(minute: Int) {
-            let minuteHandAngle: Double = Double(en / self.time.mph) * Double(minute)
+            let minuteHandAngle: Double = Double(en) / Double(self.time.mph) * Double(minute)
             self.minuteHand.routate(angle: CGFloat((minuteHandAngle * .pi) / 180.0))
 
         }
         func updateSecondHand(second: Int) {
-            let secondHandAngle: Double = Double(en / self.time.spm) * Double(second)
+            let secondHandAngle: Double = Double(en) / Double(self.time.spm) * Double(second)
             self.secondHand.routate(angle: CGFloat((secondHandAngle * .pi) / 180.0))
         }
         var hour:   Int;

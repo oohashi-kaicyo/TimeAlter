@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(clock)
+        clock.time.hpd = 26
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
