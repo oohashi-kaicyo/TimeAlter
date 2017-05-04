@@ -59,6 +59,5 @@ class ViewController: UIViewController {
         updateHourHand(hour: hour);
         updateMinuteHand(minute: minute)
         updateSecondHand(second: second)
-        LOG("\(Screen.width):\(Screen.height)")
     }
 }
