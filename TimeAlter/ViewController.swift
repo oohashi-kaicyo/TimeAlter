@@ -10,9 +10,13 @@ import UIKit
 
 class ViewController: UIViewController {
     var timer: Timer!
+    var wallpaper: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: Screen.width, height: Screen.height))
     var clock: AnalogClock = AnalogClock(width: Screen.width, hpd: 26)
     override func viewDidLoad() {
         super.viewDidLoad()
+        wallpaper.image = UIImage(named: "yuunaCheer.jpg")
+        wallpaper.contentMode = .scaleAspectFit
+        self.view.addSubview(wallpaper)
         self.view.addSubview(clock)
     }
     override func didReceiveMemoryWarning() {
