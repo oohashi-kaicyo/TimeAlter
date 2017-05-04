@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class Hand: UIView {
+class Hand: UIImageView {
     init(width: Int) {
         var width = width
         if width > Screen.width {

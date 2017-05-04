@@ -14,6 +14,8 @@ import UIKit
  */
 class AnalogClock: UIView {
     let time: Time = Time(hpd: 24)
+    let hourHand:   HourHand   = HourHand()
+    let minuteHand: MinuteHand = MinuteHand()
     let secondHand: SecondHand = SecondHand()
     init(width: Int) {
         var width = width
@@ -23,6 +25,8 @@ class AnalogClock: UIView {
         let xCentering: Int = Screen.width  / 2 - width / 2
         let yCentering: Int = Screen.height / 2 - width / 2
         super.init(frame: CGRect(x: xCentering, y: yCentering, width: width, height: width))
+        self.addSubview(self.hourHand)
+        self.addSubview(self.minuteHand)
         self.addSubview(self.secondHand)
     }
     convenience init() {
@@ -37,16 +41,17 @@ class AnalogClock: UIView {
     func updateHand() {
         let en: Int = 360
         func updateHourHand(hour: Int) {
-            // @to-do let hourHandAngle: Int   = en / self.time.hpd * hour
-            // @to-do アニメーション
+            let hourHandAngle: Double = Double(en / self.time.hpd) * Double(hour)
+            self.hourHand.routate(angle: CGFloat((hourHandAngle * .pi) / 180.0))
         }
         func updateMinuteHand(minute: Int) {
-            // @to-do let minuteHandAngle: Int = en / self.time.mph * minute
-            // @to-do アニメーション
+            let minuteHandAngle: Double = Double(en / self.time.mph) * Double(minute)
+            self.minuteHand.routate(angle: CGFloat((minuteHandAngle * .pi) / 180.0))
+
         }
         func updateSecondHand(second: Int) {
-            let secondHandAngle: CGFloat = CGFloat(en) - CGFloat(en / self.time.spm) * CGFloat(second)
-            self.secondHand.routate(angle: secondHandAngle)
+            let secondHandAngle: Double = Double(en / self.time.spm) * Double(second)
+            self.secondHand.routate(angle: CGFloat((secondHandAngle * .pi) / 180.0))
         }
         var hour:   Int;
         var minute: Int;
