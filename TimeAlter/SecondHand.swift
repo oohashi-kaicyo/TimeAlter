@@ -23,6 +23,7 @@ class SecondHand: Hand {
         let context = UIGraphicsGetCurrentContext()
         context?.setStrokeColor(UIColor.black.cgColor)
         context?.setLineWidth(1)
+        context?.setAllowsAntialiasing(false)
         context?.move(to: CGPoint(x: size.width / 2, y: 40))
         context?.addLine(to: CGPoint(x: size.width / 2, y: size.width / 2))
         context?.closePath()
