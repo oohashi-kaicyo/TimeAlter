@@ -12,10 +12,10 @@ class ViewController: UIViewController {
     let time:Time = Time(hpd: 24);
     var timer: Timer!
     // 引数を省略した場合を想定して，端末の縦横比率を獲得して算出
-    let clock: AnalogClock = AnalogClock(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+//    let clock: AnalogClock = AnalogClock(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
     override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.addSubview(clock)
+//        super.viewsDidLoad()
+//        self.view.addSubview(clock)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -60,5 +60,6 @@ class ViewController: UIViewController {
         updateHourHand(hour: hour);
         updateMinuteHand(minute: minute)
         updateSecondHand(second: second)
+        LOG("\(Screen.width):\(Screen.height)")
     }
 }

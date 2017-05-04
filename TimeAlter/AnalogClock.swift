@@ -1,5 +1,5 @@
 //
-//  Clock.swift
+//  AnalogClock.swift
 //  TimeAlter
 //
 //  Created by oohashi on 2017/05/03.
@@ -8,25 +8,22 @@
 
 import Foundation
 import UIKit
-
-/**
- * @brief アナログ時計を表現するクラス
- */
+struct screen {
+//    screenSize: Size = UIScreen.mainScreen().bounds
+}
 class AnalogClock: UIView {
-    public var testView: UIView
-    // (private: Dial:  UIview)// 大きさを指定addする時の表示位置はどのようにして設定?
-    // (private: Hand:  UIview)// 大きさを指定
-    // private dial: Dial
-    // private hourHand: Hand
-    // private minuteHand: Hand
-    // private secondHand: Hand
-    override init(frame: CGRect) {
-        testView = UIView(frame: frame)
-        super.init(frame: frame)
-        self.testView.backgroundColor = UIColor.blue
-        self.addSubview(self.testView)
-        self.testView.transform = self.testView.transform.rotated(by: 45)
+    init() {
+        // 本体AnalogClockの大きさは?
+        // 位置は中心に設置?
+//         UIScreen.mainScreen().bounds
+        super.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
     }
+    init(width witdh: Int) {
+        // もしスマホより大きければ，小さくして表示
+        super.init(frame: CGRect(x: 0, y: 0, width: witdh, height: witdh))
+        //        self.transform = self.transform.rotated(by: rotate.rotation)
+    }
+    // イニシャライザにアクセスできないようにしたい
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
