@@ -42,11 +42,13 @@ class Time {
         return (hour, minute, second)
     }
     init(hpd: Int) {
-        if hpd < 24 || hpd > 48 {
-            // @to-do 入力値エラー
-            return
+        if hpd < 24 {
+            self.hpd = 24
+        } else if hpd > 48 {
+            self.hpd = 48
+        } else {
+            self.hpd =  hpd
         }
-        self.hpd =  hpd
         self.spm = Time.spd / (self.hpd * self.mph)
     }
 }

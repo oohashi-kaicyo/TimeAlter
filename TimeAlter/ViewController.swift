@@ -10,11 +10,10 @@ import UIKit
 
 class ViewController: UIViewController {
     var timer: Timer!
-    let clock: AnalogClock = AnalogClock()
+    var clock: AnalogClock = AnalogClock(width: Screen.width, hpd: 26)
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(clock)
-        clock.time.hpd = 26
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

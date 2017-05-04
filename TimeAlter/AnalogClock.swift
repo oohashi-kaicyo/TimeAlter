@@ -13,24 +13,31 @@ import UIKit
  * @breif アナログ時計を表現するクラス
  */
 class AnalogClock: UIView {
-    let time: Time = Time(hpd: 24)
-    let hourHand:   HourHand   = HourHand()
-    let minuteHand: MinuteHand = MinuteHand()
-    let secondHand: SecondHand = SecondHand()
-    init(width: Int) {
+    var time: Time
+    var dial: Dial
+    var hourHand:   HourHand
+    var minuteHand: MinuteHand
+    var secondHand: SecondHand
+    init(width: Int, hpd: Int) {
         var width = width
         if width > Screen.width {
             width = Screen.width
         }
+        time = Time(hpd: hpd)
+        self.dial       = Dial(width: width, hpd: time.hpd)
+        self.hourHand   = HourHand(width: width)
+        self.minuteHand = MinuteHand(width: width)
+        self.secondHand = SecondHand(width: width)
         let xCentering: Int = Screen.width  / 2 - width / 2
         let yCentering: Int = Screen.height / 2 - width / 2
         super.init(frame: CGRect(x: xCentering, y: yCentering, width: width, height: width))
+        self.addSubview(self.dial)
         self.addSubview(self.hourHand)
         self.addSubview(self.minuteHand)
         self.addSubview(self.secondHand)
     }
-    convenience init() {
-        self.init(width: Screen.width)
+    convenience init(hpd: Int) {
+        self.init(width: Screen.width, hpd: hpd)
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
