@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    let setting = UserDefaults.standard
+    let setting   = UserDefaults.standard
     @IBAction func didTapSetting(_ sender: Any) {
         let storyboard: UIStoryboard = self.storyboard!
         let nextView = storyboard.instantiateViewController(withIdentifier: "fromMainToSetting")
@@ -43,17 +43,8 @@ class ViewController: UIViewController {
         clock.updateHand()
     }
     override func viewDidAppear(_ animated: Bool) {
-        LOG()
-        var hpd: Int? = setting.integer(forKey: "hpd")
-        if(hpd == nil) {
-            hpd = 24;
-            setting.set(hpd, forKey: "hpd")
-        }
         self.clock.removeFromSuperview()
-        self.clock = AnalogClock(width: Screen.width, hpd: hpd!)
-        // setterにusrDefaultで自動的の保存
-        // usrDefaultで無名関数クロージャでインスタンスを保持，生成回数を1回に抑える
-        // 行数的に変化はしないから大して意味はないではないのか
+        self.clock = AnalogClock(width: Screen.width, hpd: AnalogClock.conf.hpd)
         self.view.addSubview(self.clock)
     }
 }

@@ -27,7 +27,7 @@ class SettingViewController: UIViewController {
     @IBAction func didChangeSlider(_ sender: UISlider) {
         let hpd: Int = Int(sender.value + 0.5)
         self.hpdLabel.text = "\(hpd)時間 / 日"
-        setting.set(hpd, forKey: "hpd")
+        AnalogClock.conf.hpd = hpd
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +37,7 @@ class SettingViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        let hpd = setting.integer(forKey: "hpd")
+        let hpd = AnalogClock.conf.hpd
         self.hpdLabel.text   = "\(hpd)時間 / 日";
         self.hpdSlider.value = Float(hpd);
     }
