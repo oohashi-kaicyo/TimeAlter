@@ -30,4 +30,19 @@ class Hand: UIImageView {
         self.transform = CGAffineTransform.identity;
         self.transform = self.transform.rotated(by: angle)
     }
+    func drawRectangleOnImage(handColor: CGColor, handWidth: CGFloat, handLength: CGFloat) /*-> UIImage*/ {
+        let size = self.frame.size
+        UIGraphicsBeginImageContext(size)
+        let context = UIGraphicsGetCurrentContext()
+        context?.setStrokeColor(handColor)
+        context?.setLineWidth(handWidth)
+        context?.setAllowsAntialiasing(false)
+        context?.move(to: CGPoint(x: size.width / 2, y: handLength))
+        context?.addLine(to: CGPoint(x: size.width / 2, y: size.width / 2))
+        context?.closePath()
+        context?.drawPath(using: .stroke)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        self.image = newImage!
+    }
 }

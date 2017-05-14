@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension AnalogClock {
     /**
@@ -31,21 +32,37 @@ extension AnalogClock {
                 self.conf.set(newValue, forKey: Conf.hpd.rawValue)
             }
         }
-        enum Theme {
-            case white
-            case monokai
+        enum Theme: String {
+            case white   = "white"
+            case monokai = "monokai"
         }
         var theme: Theme {
             get {
-                var theme: Theme? = (conf.object(forKey: Conf.theme.rawValue) as! AnalogClock.ClockConfigSingleton.Theme)
+                var theme: String? = conf.object(forKey: Conf.theme.rawValue) as? String
                 if(theme == nil) {
-                    theme = Theme.monokai;
+                    theme = Theme.white.rawValue;
                     conf.set(theme, forKey: Conf.theme.rawValue)
                 }
-                return theme!
+                return AnalogClock.ClockConfigSingleton.Theme(rawValue: theme!)!
             }
             set {
                 self.conf.set(newValue, forKey: Conf.theme.rawValue)
+            }
+        }
+        var bgColor: UIColor {
+            switch AnalogClock.conf.theme {
+            case .white:
+                return .white
+            case .monokai:
+                return .black
+            }
+        }
+        var fgColor: UIColor {
+            switch AnalogClock.conf.theme {
+            case .white:
+                return .black
+            case .monokai:
+                return .white
             }
         }
         static let sharedInstance = ClockConfigSingleton()

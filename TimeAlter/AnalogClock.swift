@@ -18,12 +18,12 @@ class AnalogClock: UIView {
     var hourHand:   HourHand
     var minuteHand: MinuteHand
     var secondHand: SecondHand
-    init(width: Int, hpd: Int) {
+    init(width: Int) {
         var width = width
         if width > Screen.width {
             width = Screen.width
         }
-        time = Time(hpd: hpd)
+        time = Time(hpd: AnalogClock.conf.hpd)
         self.dial       = Dial(width: width, hpd: time.hpd)
         self.hourHand   = HourHand(width: width)
         self.minuteHand = MinuteHand(width: width)
@@ -36,8 +36,8 @@ class AnalogClock: UIView {
         self.addSubview(self.minuteHand)
         self.addSubview(self.secondHand)
     }
-    convenience init(hpd: Int) {
-        self.init(width: Screen.width, hpd: hpd)
+    convenience init() {
+        self.init(width: Screen.width)
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

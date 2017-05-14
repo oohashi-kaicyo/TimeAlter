@@ -20,9 +20,10 @@ class Dial: UIView {
         }
         super.init(frame: CGRect(x: 0, y: 0, width: width, height: width))
         for num in 1...hpd {
-            let numeral: Numeral = Numeral(width: width, hpd: hpd, numeral: num)
+            let numeral: Numeral = Numeral(width: width, hpd: hpd, numeral: num, fontColor: AnalogClock.conf.fgColor)
             self.addSubview(numeral)
         }
+        self.backgroundColor = AnalogClock.conf.bgColor
     }
     convenience init(hpd: Int) {
         self.init(width: Screen.width, hpd: hpd)

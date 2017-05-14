@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     }
     var timer: Timer!
     var wallpaper: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: Screen.width, height: Screen.height))
-    var clock: AnalogClock = AnalogClock(width: Screen.width, hpd: 24)
+    var clock: AnalogClock = AnalogClock()
     override func viewDidLoad() {
         super.viewDidLoad()
         // @to-do 壁紙機能
@@ -44,7 +44,7 @@ class ViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         self.clock.removeFromSuperview()
-        self.clock = AnalogClock(width: Screen.width, hpd: AnalogClock.conf.hpd)
+        self.clock = AnalogClock()
         self.view.addSubview(self.clock)
     }
 }
