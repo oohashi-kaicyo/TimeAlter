@@ -73,22 +73,13 @@ class SettingViewController: UIViewController, UIImagePickerControllerDelegate, 
             self.present(controller, animated: true, completion: nil)
         }
     }
-    private func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         picker.dismiss(animated: true, completion: nil)
-        if info[UIImagePickerControllerOriginalImage] != nil {
-            // アップ用画像の一時保存
-            let tookImage: UIImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-            var imagePath = NSHomeDirectory()
-            imagePath = (imagePath as NSString).appendingPathComponent("Documents/upload.jpeg")
-            let imageData: NSData = UIImageJPEGRepresentation(tookImage, 0.3)! as NSData
-            
-            let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-            let documentDirectory = paths[0]
-            let myFilePath = (documentDirectory as NSString).appendingPathComponent("lastimage")
-            let isSuccess = imageData.write(toFile: myFilePath, atomically: true)
-            if isSuccess {
-                // 画像ファイルに対する処理
+        func saveImage() {
+            if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+                Wallpaper.conf.set(UIImagePNGRepresentation(image), forKey: Wallpaper.WallpaperConf.wallpaper.rawValue)
             }
         }
+        saveImage()
     }
 }

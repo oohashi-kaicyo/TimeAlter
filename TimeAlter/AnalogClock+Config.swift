@@ -53,7 +53,7 @@ extension AnalogClock {
         var bgColor: UIColor {
             switch AnalogClock.conf.theme {
             case .white:
-                return .white
+                return .clear
             case .monokai:
                 return .black
             }
