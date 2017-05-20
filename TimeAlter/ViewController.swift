@@ -21,8 +21,8 @@ class ViewController: UIViewController {
     var clock: AnalogClock   = AnalogClock()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.addSubview(wallpaper)
-        self.view.addSubview(self.clock)
+        self.view.insertSubview(self.wallpaper, aboveSubview: self.view)
+        self.view.sendSubview(toBack: wallpaper)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -48,9 +48,10 @@ class ViewController: UIViewController {
         func renewWallpaper() {
             self.wallpaper.removeFromSuperview()
             self.wallpaper = Wallpaper()
-            self.view.addSubview(self.wallpaper)
+            self.view.insertSubview(self.wallpaper, aboveSubview: self.view)
         }
         renewWallpaper()
         renewClock()
+        self.view.sendSubview(toBack: wallpaper)
     }
 }
