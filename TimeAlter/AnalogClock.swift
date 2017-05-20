@@ -31,6 +31,7 @@ class AnalogClock: UIView {
         let xCentering: Int = Screen.width  / 2 - width / 2
         let yCentering: Int = Screen.height / 2 - width / 2
         super.init(frame: CGRect(x: xCentering, y: yCentering, width: width, height: width))
+        updateHand()
         self.addSubview(self.dial)
         self.addSubview(self.hourHand)
         self.addSubview(self.minuteHand)

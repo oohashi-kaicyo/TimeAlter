@@ -40,13 +40,14 @@ extension AnalogClock {
             get {
                 var theme: String? = conf.object(forKey: Conf.theme.rawValue) as? String
                 if(theme == nil) {
+                    LOG()
                     theme = Theme.white.rawValue;
                     conf.set(theme, forKey: Conf.theme.rawValue)
                 }
                 return AnalogClock.ClockConfigSingleton.Theme(rawValue: theme!)!
             }
             set {
-                self.conf.set(newValue, forKey: Conf.theme.rawValue)
+                self.conf.set(newValue.rawValue, forKey: Conf.theme.rawValue)
             }
         }
         var bgColor: UIColor {
