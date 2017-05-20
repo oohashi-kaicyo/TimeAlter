@@ -17,14 +17,11 @@ class ViewController: UIViewController {
         self.present(nextView, animated: true, completion: nil)
     }
     var timer: Timer!
-    var wallpaper: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: Screen.width, height: Screen.height))
-    var clock: AnalogClock = AnalogClock()
+    var wallpaper: Wallpaper = Wallpaper()
+    var clock: AnalogClock   = AnalogClock()
     override func viewDidLoad() {
         super.viewDidLoad()
-        // @to-do 壁紙機能
-        // wallpaper.image = UIImage(named: "yuunaCheer.jpg")
-        // wallpaper.contentMode = .scaleAspectFit
-        // self.view.addSubview(wallpaper)
+        self.view.addSubview(wallpaper)
         self.view.addSubview(self.clock)
     }
     override func didReceiveMemoryWarning() {
@@ -43,8 +40,17 @@ class ViewController: UIViewController {
         clock.updateHand()
     }
     override func viewDidAppear(_ animated: Bool) {
-        self.clock.removeFromSuperview()
-        self.clock = AnalogClock()
-        self.view.addSubview(self.clock)
+        func renewClock() {
+            self.clock.removeFromSuperview()
+            self.clock = AnalogClock()
+            self.view.addSubview(self.clock)
+        }
+        func renewWallpaper() {
+            self.wallpaper.removeFromSuperview()
+            self.wallpaper = Wallpaper()
+            self.view.addSubview(self.wallpaper)
+        }
+        renewWallpaper()
+        renewClock()
     }
 }
