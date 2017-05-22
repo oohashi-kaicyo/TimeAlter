@@ -18,27 +18,29 @@ import Foundation
 import UIKit
 
 class SettingViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
+    var clock: AnalogClock   = AnalogClock()
+    var wallpaper: Wallpaper = Wallpaper()
+    @IBOutlet weak var wallpaperIsFitSwitch: UISwitch!
     @IBOutlet weak var hpdLabel: UILabel!
     @IBOutlet weak var hpdSlider: UISlider!
+    @IBOutlet weak var opacitySlider: UISlider!
     @IBOutlet weak var darkThemeButton: UISwitch!
     @IBAction func didClickcameraRollButton(_ sender: Any) {
-        let actionSheet = UIAlertController(title:"Image", message: "Select the image", preferredStyle: UIAlertControllerStyle.actionSheet)
-        let actionCancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: {action in
-        })
-        let actionNormal = UIAlertAction(title: "From Album", style: UIAlertActionStyle.default, handler: {action in
-            self.pickImageFromLibrary()
-        })
-        actionSheet.addAction(actionCancel)
-        actionSheet.addAction(actionNormal)
-        self.present(actionSheet, animated: true, completion: nil)
+        pickImageFromLibrary()
     }
     @IBAction func didChangeDarkThemeButton(_ sender: Any) {
         if ( (sender as AnyObject).isOn ) {
-            AnalogClock.conf.theme = .monokai
+            clock.theme = .monokai
             return
         }
-        AnalogClock.conf.theme = .white
+        clock.theme = .white
+    }
+    @IBAction func didChangeWallpaperIsFitSwitch(_ sender: Any) {
+        if ( (sender as AnyObject).isOn ) {
+            self.wallpaper.wallpaperContentsMode = .scaleAspectFit
+            return
+        }
+        self.wallpaper.wallpaperContentsMode = .scaleAspectFill
     }
     @IBAction func didTapClose(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -46,8 +48,10 @@ class SettingViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBAction func didChangeSlider(_ sender: UISlider) {
         let hpd: Int = Int(sender.value + 0.5)
         self.hpdLabel.text = "\(hpd)時間 / 日"
-        AnalogClock.conf.hpd = hpd
-        self.darkThemeButton.isOn = AnalogClock.conf.theme == .monokai ? true : false
+        clock.hpd = hpd
+    }
+    @IBAction func didChangeOpacitySlider(_ sender: Any) {
+        self.wallpaper.opacity = (sender as AnyObject).value
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,10 +61,12 @@ class SettingViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        let hpd = AnalogClock.conf.hpd
-        self.hpdLabel.text   = "\(hpd)時間 / 日";
-        self.hpdSlider.value = Float(hpd);
-        self.darkThemeButton.isOn = AnalogClock.conf.theme == .monokai ? true : false
+        let hpd                        = clock.hpd
+        self.hpdLabel.text             = "\(hpd)時間 / 日";
+        self.hpdSlider.value           = Float(hpd);
+        self.darkThemeButton.isOn      = self.clock.theme                     == .monokai        ? true : false
+        self.wallpaperIsFitSwitch.isOn = self.wallpaper.wallpaperContentsMode == .scaleAspectFit ? true : false
+        self.opacitySlider.value       = self.wallpaper.opacity
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
@@ -77,7 +83,7 @@ class SettingViewController: UIViewController, UIImagePickerControllerDelegate, 
         picker.dismiss(animated: true, completion: nil)
         func saveImage() {
             if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-                Wallpaper.conf.set(UIImagePNGRepresentation(image), forKey: Wallpaper.WallpaperConf.wallpaper.rawValue)
+                wallpaper.wallpaperImage = image
             }
         }
         saveImage()

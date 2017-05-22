@@ -12,7 +12,9 @@ import UIKit
 class HourHand: Hand {
     override init(width: Int) {
         super.init(width: width)
-        drawRectangleOnImage(handColor: AnalogClock.conf.fgColor.cgColor, handWidth: 4, handLength: 100)
+        self.handWidth  = 4
+        self.handLength = 100
+        changeHand(color: .black)
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

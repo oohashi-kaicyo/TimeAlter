@@ -12,7 +12,9 @@ import UIKit
 class MinuteHand: Hand {
     override init(width: Int) {
         super.init(width: width)
-        drawRectangleOnImage(handColor: AnalogClock.conf.fgColor.cgColor, handWidth: 2, handLength: 60)
+        self.handWidth  = 2
+        self.handLength = 60
+        changeHand(color: .black)
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 
 class Hand: UIImageView {
+    var handLength: CGFloat = 0
+    var handWidth:  CGFloat = 0
     init(width: Int) {
         var width = width
         if width > Screen.width {
@@ -24,13 +26,13 @@ class Hand: UIImageView {
         fatalError("init(coder:) has not been implemented")
     }
     /**
-     * @brief時計の針を進めるクラス
+     * @brief時計の針を進めるメソッド
      */
     func routate(angle: CGFloat) {
         self.transform = CGAffineTransform.identity;
         self.transform = self.transform.rotated(by: angle)
     }
-    func drawRectangleOnImage(handColor: CGColor, handWidth: CGFloat, handLength: CGFloat) /*-> UIImage*/ {
+    func drawRectangleOnImage(handColor: CGColor, handWidth: CGFloat, handLength: CGFloat) {
         let size = self.frame.size
         UIGraphicsBeginImageContext(size)
         let context = UIGraphicsGetCurrentContext()
@@ -44,5 +46,8 @@ class Hand: UIImageView {
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         self.image = newImage!
+    }
+    func changeHand(color: UIColor) {
+        drawRectangleOnImage(handColor: color.cgColor, handWidth: self.handWidth, handLength: self.handLength)
     }
 }

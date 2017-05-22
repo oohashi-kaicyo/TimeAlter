@@ -9,20 +9,37 @@
 import UIKit
 
 class ViewController: UIViewController {
-    let setting   = UserDefaults.standard
-    @IBAction func didTapSetting(_ sender: Any) {
-        let storyboard: UIStoryboard = self.storyboard!
-        let nextView = storyboard.instantiateViewController(withIdentifier: "fromMainToSetting")
-                       as! SettingViewController
-        self.present(nextView, animated: true, completion: nil)
-    }
     var timer: Timer!
     var wallpaper: Wallpaper = Wallpaper()
     var clock: AnalogClock   = AnalogClock()
+    @IBOutlet weak var bar: UIToolbar!
+    @IBAction func goToConf(_ sender: Any) {
+        func screenTransition() {
+            let storyboard: UIStoryboard = self.storyboard!
+            let nextView = storyboard.instantiateViewController(withIdentifier: "fromMainToSetting")
+                as! SettingViewController
+            nextView.wallpaper = self.wallpaper
+            self.present(nextView, animated: true, completion: nil)
+        }
+        screenTransition()
+    }
+    func viewTapped() {
+        if self.bar.isHidden {
+            self.bar.isHidden = false
+            return
+        }
+        self.bar.isHidden = true
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.insertSubview(self.wallpaper, aboveSubview: self.view)
         self.view.addSubview(self.clock)
+        self.view.bringSubview(toFront: self.bar)
+        func barHiddenSetting() {
+            self.view.isUserInteractionEnabled = true
+            self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ViewController.viewTapped)))
+        }
+        barHiddenSetting()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -40,12 +57,8 @@ class ViewController: UIViewController {
         clock.updateHand()
     }
     override func viewDidAppear(_ animated: Bool) {
-        func renewClock() {
-            self.clock.removeFromSuperview()
-            self.clock = AnalogClock()
-            self.view.addSubview(self.clock)
-        }
-        renewClock()
+        self.clock.renew()
         self.wallpaper.renew()
     }
+    
 }

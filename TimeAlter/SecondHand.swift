@@ -12,7 +12,9 @@ import UIKit
 class SecondHand: Hand {
     override init(width: Int) {
         super.init(width: width)
-        drawRectangleOnImage(handColor: AnalogClock.conf.fgColor.cgColor, handWidth: 1, handLength: 40)
+        self.handWidth  = 1
+        self.handLength = 40
+        changeHand(color: .black)
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

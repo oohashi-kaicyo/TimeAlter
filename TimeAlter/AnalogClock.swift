@@ -23,7 +23,8 @@ class AnalogClock: UIView {
         if width > Screen.width {
             width = Screen.width
         }
-        time = Time(hpd: AnalogClock.conf.hpd)
+        let _hpd        = 24
+        self.time       = Time(hpd: _hpd)
         self.dial       = Dial(width: width, hpd: time.hpd)
         self.hourHand   = HourHand(width: width)
         self.minuteHand = MinuteHand(width: width)
@@ -31,7 +32,10 @@ class AnalogClock: UIView {
         let xCentering: Int = Screen.width  / 2 - width / 2
         let yCentering: Int = Screen.height / 2 - width / 2
         super.init(frame: CGRect(x: xCentering, y: yCentering, width: width, height: width))
+        self.time       = Time(hpd: self.hpd)
+        self.dial       = Dial(width: width, hpd: time.hpd)
         updateHand()
+        self.renew()
         self.addSubview(self.dial)
         self.addSubview(self.hourHand)
         self.addSubview(self.minuteHand)
