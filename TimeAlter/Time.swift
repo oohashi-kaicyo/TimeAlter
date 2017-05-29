@@ -43,10 +43,8 @@ class Time {
     }
     init(hpd: Int) {
         if hpd < 24 {
-            LOG("時間は24時間以上を指定する必要があります")
             self.hpd = 24
         } else if hpd > 48 {
-            LOG("時間は30時間未満を指定する必要があります")
             self.hpd = 48
         } else {
             self.hpd =  hpd

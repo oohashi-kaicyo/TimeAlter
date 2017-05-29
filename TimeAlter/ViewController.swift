@@ -38,6 +38,7 @@ class ViewController: UIViewController {
         func barHiddenSetting() {
             self.view.isUserInteractionEnabled = true
             self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ViewController.viewTapped)))
+            self.bar.isHidden = true
         }
         barHiddenSetting()
     }
