@@ -31,7 +31,7 @@ public func printAdress(_ obj: AnyObject) {
 /**
  * @brief 画面サイズを扱う構造体
  *
- * @param width(Int): 画面の横サイズ
+ * @param width(Int):  画面の横サイズ
  * @param height(Int): 画面の縦サイズ
  */
 public struct Screen {
