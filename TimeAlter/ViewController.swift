@@ -9,9 +9,9 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var timer: Timer!
-    var wallpaper: Wallpaper = Wallpaper()
-    var clock: AnalogClock   = AnalogClock()
+    public var timer: Timer!
+    public var wallpaper: Wallpaper = Wallpaper()
+    public var clock: AnalogClock   = AnalogClock()
     @IBOutlet weak var bar: UIToolbar!
     @IBAction func goToConf(_ sender: Any) {
         func screenTransition() {
@@ -42,9 +42,6 @@ class ViewController: UIViewController {
         }
         barHiddenSetting()
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.update), userInfo: nil, repeats: true)
@@ -61,5 +58,4 @@ class ViewController: UIViewController {
         self.clock.renew()
         self.wallpaper.renew()
     }
-    
 }

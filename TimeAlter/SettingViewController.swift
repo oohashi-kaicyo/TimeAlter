@@ -18,13 +18,13 @@ import Foundation
 import UIKit
 
 class SettingViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    var clock: AnalogClock   = AnalogClock()
-    var wallpaper: Wallpaper = Wallpaper()
+    public var clock: AnalogClock   = AnalogClock()
+    public var wallpaper: Wallpaper = Wallpaper()
     @IBOutlet weak var wallpaperIsFitSwitch: UISwitch!
-    @IBOutlet weak var hpdLabel: UILabel!
-    @IBOutlet weak var hpdSlider: UISlider!
-    @IBOutlet weak var opacitySlider: UISlider!
-    @IBOutlet weak var darkThemeButton: UISwitch!
+    @IBOutlet weak var hpdLabel:             UILabel!
+    @IBOutlet weak var hpdSlider:            UISlider!
+    @IBOutlet weak var opacitySlider:        UISlider!
+    @IBOutlet weak var darkThemeButton:      UISwitch!
     @IBAction func didClickcameraRollButton(_ sender: Any) {
         pickImageFromLibrary()
     }
@@ -53,12 +53,6 @@ class SettingViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBAction func didChangeOpacitySlider(_ sender: Any) {
         self.wallpaper.opacity = (sender as AnyObject).value
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         let hpd                        = clock.hpd
@@ -67,9 +61,6 @@ class SettingViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.darkThemeButton.isOn      = self.clock.theme                     == .monokai        ? true : false
         self.wallpaperIsFitSwitch.isOn = self.wallpaper.wallpaperContentsMode == .scaleAspectFit ? true : false
         self.opacitySlider.value       = self.wallpaper.opacity
-    }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
     }
     func pickImageFromLibrary() {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
